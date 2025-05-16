@@ -6,8 +6,8 @@
 /Makefile
 /cmake_install.cmake
 /*.cmake
-/*.zip
 
+# Compiled binaries and libraries
 *.o
 *.obj
 *.so
@@ -17,6 +17,7 @@
 *.dll
 *.pdb
 
+# Editor and OS files
 *~
 *.swp
 *.swo
@@ -24,9 +25,14 @@
 .vscode/
 .idea/
 
+# Test logs and generated images
 test_log.txt
+*.png
+
+# Delivery and archive files
+*.zip
+delivery.zip
+
 /output/
 expected/
 scrims/
-
-*.png
