@@ -8,7 +8,7 @@ namespace prog {
 
     class Color {
     private:
-        // TODO: private fields required for color representation.
+        rgb_value _red, _green, _blue;
 
     public:
         Color();
