@@ -12,6 +12,8 @@
 #include "Command/VMirror.hpp"
 #include "Command/Replace.hpp"
 #include "Command/Fill.hpp"
+#include "Command/RotateRight.hpp"
+#include "Command/RotateLeft.hpp"
 #include "Logger.hpp"
 
 #include <fstream>
@@ -114,6 +116,14 @@ namespace prog {
             Color color;
             input >> x >> y >> w >> h >> color;
             return new command::Fill(x, y, w, h, color);
+        }
+
+        if (command_name == "rotate_right") {
+            return new command::RotateRight();
+        }
+
+        if (command_name == "rotate_left") {
+            return new command::RotateLeft();
         }
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
