@@ -1,5 +1,8 @@
 # Used AI to make gitignore
 
+tester
+runscrim
+
 /build/
 /CMakeFiles/
 /CMakeCache.txt
