@@ -11,6 +11,7 @@
 #include "Command/HMirror.hpp"
 #include "Command/VMirror.hpp"
 #include "Command/Replace.hpp"
+#include "Command/Fill.hpp"
 #include "Logger.hpp"
 
 #include <fstream>
@@ -106,6 +107,13 @@ namespace prog {
             Color old_color, new_color;
             input >> old_color >> new_color;
             return new command::Replace(old_color, new_color);
+        }
+
+        if (command_name == "fill") {
+            int x, y, w, h;
+            Color color;
+            input >> x >> y >> w >> h >> color;
+            return new command::Fill(x, y, w, h, color);
         }
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
