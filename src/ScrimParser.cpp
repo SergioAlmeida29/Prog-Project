@@ -18,6 +18,7 @@
 #include "Command/Add.hpp"
 #include "Command/Slide.hpp"
 #include "Command/Move.hpp"
+#include "Command/ScaleUp.hpp"
 #include "Logger.hpp"
 
 #include <fstream>
@@ -154,6 +155,12 @@ namespace prog {
             int x, y;
             input >> x >> y;
             return new command::Move(x, y);
+        }
+
+        if (command_name == "scaleup") {
+            int x, y;
+            input >> x >> y;
+            return new command::ScaleUp(x, y);
         }
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
