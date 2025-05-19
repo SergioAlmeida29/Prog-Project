@@ -9,6 +9,7 @@
 #include "Command/Invert.hpp"
 #include "Command/ToGrayScale.hpp"
 #include "Command/HMirror.hpp"
+#include "Command/VMirror.hpp"
 #include "Logger.hpp"
 
 #include <fstream>
@@ -94,6 +95,10 @@ namespace prog {
 
         if (command_name == "h_mirror") {
             return new command::HMirror();
+        }
+
+        if (command_name == "v_mirror") {
+            return new command::VMirror();
         }
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
