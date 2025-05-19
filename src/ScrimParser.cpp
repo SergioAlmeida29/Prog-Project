@@ -6,6 +6,9 @@
 #include "Command/Blank.hpp"
 #include "Command/Save.hpp"
 #include "Command/Open.hpp"
+#include "Command/Invert.hpp"
+#include "Command/ToGrayScale.hpp"
+#include "Command/HMirror.hpp"
 #include "Logger.hpp"
 
 #include <fstream>
@@ -81,7 +84,17 @@ namespace prog {
             return new command::Open(filename);
         }
 
-        // TODO: implement cases for the new commands
+        if (command_name == "invert") {
+            return new command::Invert();
+        }
+
+        if (command_name == "to_gray_scale") {
+            return new command::ToGrayScale();
+        }
+
+        if (command_name == "h_mirror") {
+            return new command::HMirror();
+        }
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
         return nullptr;
