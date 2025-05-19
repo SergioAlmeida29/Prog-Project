@@ -14,6 +14,7 @@
 #include "Command/Fill.hpp"
 #include "Command/RotateRight.hpp"
 #include "Command/RotateLeft.hpp"
+#include "Command/Crop.hpp"
 #include "Logger.hpp"
 
 #include <fstream>
@@ -124,6 +125,12 @@ namespace prog {
 
         if (command_name == "rotate_left") {
             return new command::RotateLeft();
+        }
+
+        if (command_name == "crop") {
+            int x, y, w, h;
+            input >> x >> y >> w >> h;
+            return new command::Crop(x, y, w, h);
         }
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
