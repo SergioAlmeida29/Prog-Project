@@ -15,6 +15,8 @@
 #include "Command/RotateRight.hpp"
 #include "Command/RotateLeft.hpp"
 #include "Command/Crop.hpp"
+#include "Command/Add.hpp"
+#include "Command/Slide.hpp"
 #include "Logger.hpp"
 
 #include <fstream>
@@ -131,6 +133,20 @@ namespace prog {
             int x, y, w, h;
             input >> x >> y >> w >> h;
             return new command::Crop(x, y, w, h);
+        }
+
+        if (command_name == "add") {
+            string filename;
+            Color neutral;
+            int x, y;
+            input >> filename >> neutral >> x >> y;
+            return new command::Add(filename, neutral, x, y);
+        }
+
+        if (command_name == "slide") {
+            int x, y;
+            input >> x >> y;
+            return new command::Slide(x, y);
         }
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
