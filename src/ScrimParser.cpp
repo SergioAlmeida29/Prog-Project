@@ -17,6 +17,7 @@
 #include "Command/Crop.hpp"
 #include "Command/Add.hpp"
 #include "Command/Slide.hpp"
+#include "Command/Move.hpp"
 #include "Logger.hpp"
 
 #include <fstream>
@@ -147,6 +148,12 @@ namespace prog {
             int x, y;
             input >> x >> y;
             return new command::Slide(x, y);
+        }
+
+        if (command_name == "move") {
+            int x, y;
+            input >> x >> y;
+            return new command::Move(x, y);
         }
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
