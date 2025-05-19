@@ -10,6 +10,7 @@
 #include "Command/ToGrayScale.hpp"
 #include "Command/HMirror.hpp"
 #include "Command/VMirror.hpp"
+#include "Command/Replace.hpp"
 #include "Logger.hpp"
 
 #include <fstream>
@@ -99,6 +100,12 @@ namespace prog {
 
         if (command_name == "v_mirror") {
             return new command::VMirror();
+        }
+
+        if (command_name == "replace") {
+            Color old_color, new_color;
+            input >> old_color >> new_color;
+            return new command::Replace(old_color, new_color);
         }
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
