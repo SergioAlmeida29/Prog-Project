@@ -1,41 +1,61 @@
 #include "Command/Chain.hpp"
 #include "ScrimParser.hpp"
-#include <iostream>
+#include "Scrim.hpp"
+#include "Logger.hpp"
+#include <algorithm>
+#include <sstream>
 
 namespace prog {
+    namespace command {
 
-Chain::Chain(const std::vector<std::string>& scrims, std::set<std::string> call_stack)
-    : Command("chain"), scrim_files(scrims), call_stack(std::move(call_stack)) {}
+        std::unordered_set<std::string> Chain::stack_;
 
-Image* Chain::apply(Image* img) {
-    Image* current = img;
-    for (const auto& scrim_file : scrim_files) {
-        if (call_stack.count(scrim_file)) {
-            // Recursion detected, skip
-            continue;
+        Chain::Chain(const std::vector<std::string>& scrims) : Command("Chain"), scrims_(scrims) {}
+
+        Image *Chain::apply(Image *img) {
+            for(const auto& scrim : scrims_) {
+                img = runScrim(scrim, img);
+            }
+            return img;
         }
-        std::set<std::string> new_stack = call_stack;
-        new_stack.insert(scrim_file);
 
-        ScrimParser parser;
-        Scrim* scrim = parser.parseScrim(scrim_file);
-        if (!scrim) continue;
+        Image *Chain::runScrim(const std::string &scrim, Image *img) {
 
-        // Filter out save, blank, open commands
-        std::vector<Command*> filtered;
-        for (auto* cmd : scrim->getCommands()) {
-            std::string n = cmd->name();
-            if (n == "save" || n == "blank" || n == "open") continue;
-            filtered.push_back(cmd);
+            if(!stack_.insert(scrim).second) {
+                *Logger::out() << "Ignoring recursive chain to '" << scrim << "'\n";
+                return img;
+            }
+
+            ScrimParser parser;
+            Scrim* line = parser.parseScrim(scrim);
+            if(!line) {
+                *Logger::err() << "Failed to load scrim '" << scrim << "'\n";
+                stack_.erase(scrim);
+                return img;
+            }
+
+            for(Command* c : line->getCommands()) {
+                std::string name = c->name();
+
+                std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+                if(name == "blank" || name == "open" || name == "save") {
+                    continue;
+                }
+                img = c->apply(img);
+            }
+
+            delete line;
+            stack_.erase(scrim);
+            return img;
         }
-        for (auto* cmd : filtered) {
-            Image* next = cmd->apply(current);
-            if (current != img) delete current;
-            current = next;
+
+        std::string Chain::toString() const {
+            std::ostringstream ss;
+            ss << "chain";
+            for (const auto& s : scrims_) ss << ' ' << s;
+            ss << " end";
+            return ss.str();
         }
-        delete scrim;
+
     }
-    return current;
-}
-
 }

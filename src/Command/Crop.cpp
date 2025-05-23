@@ -6,7 +6,7 @@ namespace prog {
 namespace command {
     Image* Crop::apply(Image* img) {
         Image* new_img = new Image(w, h);
-        
+
         for(int i = 0; i < w && (i + x) < img->width(); i++) {
             for(int j = 0; j < h && (j + y) < img->height(); j++) {
                 if((i + x) >= 0 && (j + y) >= 0) {
@@ -14,7 +14,7 @@ namespace command {
                 }
             }
         }
-        
+
         delete img;
         return new_img;
     }
