@@ -1,0 +1,5 @@
+/home/jose-b-reis/repos/Prog-Project/cmake-build-debug/CMakeFiles/runscrim.dir
+/home/jose-b-reis/repos/Prog-Project/cmake-build-debug/CMakeFiles/tester.dir
+/home/jose-b-reis/repos/Prog-Project/cmake-build-debug/CMakeFiles/delivery.dir
+/home/jose-b-reis/repos/Prog-Project/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/jose-b-reis/repos/Prog-Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
