@@ -15,10 +15,12 @@
 #include "Command/RotateRight.hpp"
 #include "Command/RotateLeft.hpp"
 #include "Command/Crop.hpp"
+#include "Command/Resize.hpp"
 #include "Command/Add.hpp"
 #include "Command/Slide.hpp"
 #include "Command/Move.hpp"
 #include "Command/ScaleUp.hpp"
+
 #include "Command/Chain.hpp"
 #include "Logger.hpp"
 
@@ -178,6 +180,12 @@ namespace prog {
             }
 
             return new command::Chain(scrims);
+        }
+
+        if (command_name == "resize") {
+            int x, y, w, h;
+            input >> x >> y >> w >> h;
+            return new command::Resize(x, y, w, h);
         }
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
