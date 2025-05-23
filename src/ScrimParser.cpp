@@ -43,10 +43,8 @@ namespace prog {
 
 
     Scrim *ScrimParser::parseScrim(std::istream &input) {
-        // Create vector where commands will be stored
         vector<Command *> commands;
 
-        // Parse commands while there is input in the stream
         string command_name;
         while (input >> command_name) {
             Command *command = parse_command(command_name, input);
@@ -65,7 +63,6 @@ namespace prog {
             commands.push_back(command);
         }
 
-        // Create a new image pipeline
         return new Scrim(commands);
     }
 
@@ -77,7 +74,6 @@ namespace prog {
 
     Command *ScrimParser::parse_command(string command_name, istream &input) {
         if (command_name == "blank") {
-            // Read information for Blank command
             int w, h;
             Color fill;
             input >> w >> h >> fill;
@@ -187,7 +183,7 @@ namespace prog {
             input >> x >> y >> w >> h;
             return new command::Resize(x, y, w, h);
         }
-        
+
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
         return nullptr;
