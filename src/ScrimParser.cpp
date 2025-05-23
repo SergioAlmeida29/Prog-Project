@@ -187,6 +187,7 @@ namespace prog {
             input >> x >> y >> w >> h;
             return new command::Resize(x, y, w, h);
         }
+        
 
         *Logger::err() << "Command not recognized: '" + command_name + "'\n";
         return nullptr;
