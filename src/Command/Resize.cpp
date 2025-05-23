@@ -24,6 +24,7 @@ namespace prog::command {
 
             }
         }
+        delete img;
         return resized;
     }
     string Resize::toString() const {

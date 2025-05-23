@@ -17,6 +17,7 @@ set(OLD_GLOB
   "/home/jose-b-reis/repos/Prog-Project/src/Command/Move.cpp"
   "/home/jose-b-reis/repos/Prog-Project/src/Command/Open.cpp"
   "/home/jose-b-reis/repos/Prog-Project/src/Command/Replace.cpp"
+  "/home/jose-b-reis/repos/Prog-Project/src/Command/Resize.cpp"
   "/home/jose-b-reis/repos/Prog-Project/src/Command/RotateLeft.cpp"
   "/home/jose-b-reis/repos/Prog-Project/src/Command/RotateRight.cpp"
   "/home/jose-b-reis/repos/Prog-Project/src/Command/Save.cpp"
